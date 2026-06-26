@@ -1,0 +1,58 @@
+# OS / IDE Cache
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Frontend Node/Next.js files
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+dist/
+build/
+.vercel/
+*.tsbuildinfo
+frontend/tsconfig.tsbuildinfo
+frontend/next-env.d.ts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Backend Maven/Java files
+target/
+backend/target/
+backend/logs/
+backend/uploads/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+.gradle/
+
+# Environment / Secrets Files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Database backups & local data
+database/data/
+*.sql.gz
+*.backup
