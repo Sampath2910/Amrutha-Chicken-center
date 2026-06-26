@@ -31,10 +31,10 @@ public class BulkOrder {
     @Column(name = "expected_quantity", nullable = false, length = 100)
     private String expectedQuantity; // description of products, e.g., "50kg whole chicken, 200 chapathis"
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "admin_notes", columnDefinition = "TEXT")
     private String notes;
 
-    @Column(nullable = false, length = 30)
+    @Column(name = "followup_status", nullable = false, length = 30)
     private String status; // PENDING, CONTACTED, COMPLETED, CANCELLED
 
     @Column(name = "created_at", updatable = false)
