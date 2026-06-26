@@ -75,9 +75,15 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - name: Trigger Backend Deployment
+        if: env.BACKEND_HOOK != ''
         run: |
-          curl -f -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
+          curl -f -X POST "${{ env.BACKEND_HOOK }}"
+        env:
+          BACKEND_HOOK: ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}
 
       - name: Trigger Frontend Deployment
+        if: env.FRONTEND_HOOK != ''
         run: |
-          curl -f -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}"
+          curl -f -X POST "${{ env.FRONTEND_HOOK }}"
+        env:
+          FRONTEND_HOOK: ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}
