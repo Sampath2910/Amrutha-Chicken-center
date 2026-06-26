@@ -251,7 +251,7 @@ export default function HomePage() {
                   </div>
                   <div className="text-right mt-4">
                     <span className="text-xl sm:text-2xl font-black text-primary block leading-none">
-                      ₹{p.basePrice}
+                      {p.basePrice !== null && p.basePrice !== undefined ? `₹${p.basePrice}` : "--"}
                     </span>
                     <span className="text-[10px] text-slate-500 font-bold tracking-wide">
                       {t("perKg")}
@@ -381,7 +381,7 @@ export default function HomePage() {
                           </h3>
                         </div>
                         <span className="text-lg font-black text-primary leading-none text-right shrink-0">
-                          ₹{p.basePrice}
+                          {p.basePrice !== null && p.basePrice !== undefined ? `₹${p.basePrice}` : (language === "en" ? "TBD" : "త్వరలో")}
                           <span className="text-[10px] text-slate-500 font-semibold block mt-0.5 text-right">
                             {isChapathi 
                               ? "each" 
@@ -517,25 +517,31 @@ export default function HomePage() {
                   {/* Add button footer */}
                   <div className="p-6 pt-0">
                     <button
-                      disabled={!isShopOpen}
+                      disabled={!isShopOpen || p.status === "OUT_OF_STOCK" || p.basePrice === null || p.basePrice === undefined}
                       onClick={() => handleAddToCartClick(p)}
-                      className={`w-full py-3 rounded-xl text-xs font-extrabold flex items-center justify-center space-x-2 transition-all cursor-pointer ${
-                        !isShopOpen 
+                      className={`w-full py-3 rounded-xl text-xs font-extrabold flex items-center justify-center space-x-2 transition-all ${
+                        (!isShopOpen || p.status === "OUT_OF_STOCK" || p.basePrice === null || p.basePrice === undefined)
                           ? "bg-slate-200 text-slate-400 cursor-not-allowed"
                           : hasAdded 
-                          ? "bg-green-600 text-white" 
-                          : "bg-primary hover:bg-primary-hover text-white shadow-md hover:scale-[1.01]"
+                          ? "bg-green-600 text-white cursor-pointer" 
+                          : "bg-primary hover:bg-primary-hover text-white shadow-md hover:scale-[1.01] cursor-pointer"
                       }`}
                     >
-                      {hasAdded ? (
+                      {!isShopOpen ? (
+                        <span>{language === "en" ? "Shop Closed" : "షాప్ మూసివేయబడింది"}</span>
+                      ) : p.status === "OUT_OF_STOCK" ? (
+                        <span>{language === "en" ? "Out of Stock" : "స్టాక్ లేదు"}</span>
+                      ) : (p.basePrice === null || p.basePrice === undefined) ? (
+                        <span>{language === "en" ? "Price Not Set" : "ధర సెట్ చేయబడలేదు"}</span>
+                      ) : hasAdded ? (
                         <>
                           <Check className="w-4 h-4" />
-                          <span>Added to Cart</span>
+                          <span>{language === "en" ? "Added to Cart" : "కార్ట్‌కి జోడించబడింది"}</span>
                         </>
                       ) : (
                         <>
                           <Plus className="w-4 h-4" />
-                          <span>Add to Order</span>
+                          <span>{language === "en" ? "Add to Order" : "ఆర్డర్ జోడించు"}</span>
                         </>
                       )}
                     </button>

@@ -104,6 +104,9 @@ public class OrderService {
 
             // Calculate item base price subtotal
             BigDecimal price = product.getBasePrice();
+            if (price == null) {
+                throw new IllegalArgumentException("Price for '" + product.getName() + "' is not set. Please contact the administrator.");
+            }
             BigDecimal itemSubtotal = price.multiply(quantity);
             itemTotal = itemTotal.add(itemSubtotal);
 

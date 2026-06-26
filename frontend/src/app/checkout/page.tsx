@@ -657,7 +657,7 @@ Please verify my order details.`;
 
                       <div className="text-right space-y-1 shrink-0">
                         <span className="font-bold text-slate-800 block">
-                          ₹{item.product.basePrice * item.quantityValue}
+                          ₹{(item.product.basePrice || 0) * item.quantityValue}
                         </span>
                         <button
                           type="button"
@@ -767,7 +767,7 @@ Please verify my order details.`;
                   {cartItems.map((item) => (
                     <div key={item.id} className="flex justify-between text-slate-600">
                       <span>{item.quantityValue}{item.quantityUnit} x {language === "en" ? item.product.name : item.product.nameTelugu} {item.cookingApplied ? "(Cooked)" : ""}</span>
-                      <span className="font-bold">₹{item.product.basePrice * item.quantityValue}</span>
+                      <span className="font-bold">₹{(item.product.basePrice || 0) * item.quantityValue}</span>
                     </div>
                   ))}
                 </div>
