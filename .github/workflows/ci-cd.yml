@@ -43,7 +43,7 @@ jobs:
       - name: Install Dependencies
         run: |
           cd frontend
-          npm ci
+          npm install
 
       - name: Build Frontend
         run: |
@@ -60,25 +60,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: actions/setup-buildx-action@v3
+      - name: Validate Backend Docker Image Build
+        run: |
+          docker build -t amrutha-backend:test ./backend
 
-      - name: Validate Backend Dockerfile
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend
-          file: ./backend/Dockerfile
-          push: false
-
-      - name: Validate Frontend Dockerfile
-        uses: docker/build-push-action@v5
-        with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
-          push: false
-          build-args: |
-            NEXT_PUBLIC_API_URL=https://amrutha-chicken-backend.onrender.com
-            NEXT_PUBLIC_SITE_URL=https://amruthachicken.com
+      - name: Validate Frontend Docker Image Build
+        run: |
+          docker build -t amrutha-frontend:test --build-arg NEXT_PUBLIC_API_URL=https://amrutha-chicken-backend.onrender.com --build-arg NEXT_PUBLIC_SITE_URL=https://amruthachicken.com ./frontend
 
   deploy:
     name: Deploy to Render
