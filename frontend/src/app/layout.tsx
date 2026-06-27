@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "Order fresh chicken cuts (Whole, Boneless, Wings, Drumsticks), home-style chicken curry, fries, dry roasts, and soft chapathis online. Quick delivery within 15 KM service radius in Morthad, Telangana.",
   keywords: ["Chicken Shop Morthad", "Fresh Chicken Morthad", "Chicken Delivery Morthad", "Chicken Curry Morthad", "Chicken Fry Morthad", "Chapathis Morthad", "Telangana Chicken Center"],
   authors: [{ name: "Amrutha Chicken Center" }],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://amruthachicken.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://amrutha-chicken-frontend.onrender.com"),
   alternates: {
     canonical: "/",
   },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     images: ["/shop_front.jpg"],
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 };
 
@@ -56,15 +56,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://amrutha-chicken-frontend.onrender.com";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Amrutha Chicken Center",
-    "image": "https://amruthachicken.com/shop_front.jpg", 
-    "@id": "https://amruthachicken.com/#store",
-    "url": "https://amruthachicken.com",
+    "image": `${siteUrl}/shop_front.jpg`, 
+    "@id": `${siteUrl}/#store`,
+    "url": siteUrl,
     "telephone": "+918977677193",
-    "priceRange": "$$",
+    "priceRange": "₹₹",
+    "category": "Chicken Shop",
+    "description": "Amrutha Chicken Center in Morthad provides fresh daily chicken cuts (Whole, Boneless, Wings, Drumsticks) and premium mess services including chicken curry, chicken fry, dry roast, and chapathis with home delivery.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Near Bus Stand",
@@ -79,6 +82,15 @@ export default function RootLayout({
       "longitude": "78.4312"
     },
     "hasMap": "https://maps.google.com/?q=18.8257,78.4312",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "18.8257",
+        "longitude": "78.4312"
+      },
+      "geoRadius": "15000"
+    },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": [
@@ -92,7 +104,13 @@ export default function RootLayout({
       ],
       "opens": "06:00",
       "closes": "21:00"
-    }
+    },
+    "sameAs": [
+      "https://www.facebook.com/AmruthaChickenMorthad",
+      "https://www.instagram.com/AmruthaChickenMorthad",
+      "https://www.youtube.com/@AmruthaChickenMorthad",
+      "https://maps.google.com/?cid=1234567890123456789"
+    ]
   };
 
   return (
