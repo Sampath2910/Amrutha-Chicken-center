@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /customer/
+Disallow: /order-track
+
+Sitemap: https://amrutha-chicken-frontend.onrender.com/sitemap.xml
